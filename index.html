@@ -307,7 +307,7 @@ button:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(255,182,193,.9)}
 
 <!-- SCENE 2 -->
 <div class="container" id="scene2" style="text-align:center;">
-<h1>Welcome to our memories 💕</h1>
+<h1>Welcome to our memories💕</h1>
 <p>Since I can't be there to hold your hand today, I made this so you can see how much you mean to me. Every photo here is a reason why I love you😚😚</p>
 <button onclick="goScene3()">Come with me</button>
 <button onclick="backToScene1()">Back</button>
@@ -359,10 +359,10 @@ button:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(255,182,193,.9)}
 <p>Click each step and walk with me again.  </p>
 
 <div class="steps">
-<div class="step" onclick="showMemory(0)">👣</div>
-<div class="step" onclick="showMemory(1)">👣</div>
-<div class="step" onclick="showMemory(2)">👣</div>
-<div class="step" onclick="showMemory(3)">👣</div>
+<div class="step" onclick="showMemory(0)">🌹</div>
+<div class="step" onclick="showMemory(1)">💕</div>
+<div class="step" onclick="showMemory(2)">💛</div>
+<div class="step" onclick="showMemory(3)">💝</div>
 </div>
 
 <div class="memory-box" id="memoryBox">
@@ -405,18 +405,18 @@ button:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(255,182,193,.9)}
 <!-- SURPRISE SCENE -->
 <div class="container" id="surpriseScene" style="text-align:center;">
     <h2 id="surpriseInstruction">Wait... before we finish</h2>
-    <p>Close your eyes and think of our favorite spot. ❤️</p>
+    <p>Close your eyes and think of our favorite spot.😚❤️</p>
     <div id="loadingHeart" style="font-size: 60px; animation: pulse 1.5s infinite; margin: 20px;">💖</div>
     
     <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
-        <button id="readyBtn" style="opacity:0; transition: 2s;" onclick="revealFinalSurprise()">I'm ready, ga</button>
+        <button id="readyBtn" style="opacity:0; transition: 2s;" onclick="revealFinalSurprise()">Click it</button>
         <button onclick="backToScene7()" style="background:rgba(255,255,255,0.2); font-size:14px;">Back to Letter</button>
     </div>
 </div>
 
 <!-- SCENE 8 -->
 <div class="container" id="scene8" style="width: 90%; max-width: 900px; text-align: center;">
-    <h1 style="color: #ffda79; text-shadow: 0 0 20px rgba(255,218,121,0.6); margin-bottom: 20px;">Our Comfort Place 🌅</h1>
+    <h1 style="color: #ffda79; text-shadow: 0 0 20px rgba(255,218,121,0.6); margin-bottom: 20px;">Our Comfort Place</h1>
     
     <div class="final-frame" style="perspective: 1000px; margin-bottom: 20px;">
         <img src="./images/comfort_place.jpg" id="comfortPhoto" style="width: 350px; border: 10px solid #fff; border-radius: 4px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transition: transform 0.1s ease-out;">
@@ -427,7 +427,7 @@ button:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(255,182,193,.9)}
     </div>
 
     <div style="margin-top:20px;">
-        <button id="finalBtn" onclick="digitalHug()" style="background: #ff7675; display:none;">Receive my hug 🫂</button>
+        <button id="finalBtn" onclick="digitalHug()" style="background: #ff7675; display:none;">Receive my hugs 🫂</button>
         <br>
         <button onclick="backToSurprise()" style="background:none; border:1px solid rgba(255,255,255,0.3); font-size:14px; margin-top:15px;">Back</button>
     </div>
@@ -698,4 +698,5 @@ document.addEventListener("mousemove", function(e) {
 
 </script>
 </body>
+
 </html>
