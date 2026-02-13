@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine’s (Our Golden Hour) 💖</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+html,body{width:100%;height:100%;overflow:hidden;}
+
+body{
+    background:url("./images/sky.jpg") center/cover no-repeat;
+    transition:background 1s ease;
+    position:relative;
+}
+
+/* Overlay */
+.overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.25);
+    z-index:1;
+}
+
+/* Scene container */
+.container{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:#fff;
+    z-index:2;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 1s ease;
+}
+
+/* Typography */
+h1{font-size:48px;margin-bottom:15px;}
+p{font-size:18px;margin-bottom:30px;opacity:.9}
+
+/* Buttons */
+button{
+    padding:12px 35px;
+    border:none;
+    border-radius:30px;
+    background:rgba(255,182,193,.9);
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+button:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(255,182,193,.9)}
+
+/* Floating pixels */
+.pixel{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:rgba(255,255,255,.6);
+    animation:float linear infinite;
+}
+
+/* Falling leaves */
+.leaf{
+    position:absolute;
+    width:14px;
+    height:20px;
+    background:orange;
+    border-radius:50%;
+    animation:fall linear infinite;
+}
+
+/* Puzzle */
+.puzzle-container{
+    width:450px;
+    display:flex;
+    flex-wrap:wrap;
+    margin:0 auto;
+}
+.tile{
+    width:150px;
+    height:100px;
+    background-image:url("./images/mini puzzle.png");
+    background-size:450px 200px;
+    border:1px solid #fff;
+    cursor:pointer;
+}
+
+/* Scene 3 positioning */
+#scene3{
+    left:60%;
+    text-align:left;
+}
+
+/* Polaroids */
+.polaroid{
+    width:120px;
+    height:120px;
+    background-size:cover;
+    border:5px solid #fff;
+    box-shadow:0 5px 15px rgba(0,0,0,.4);
+    margin:10px;
+    opacity:0;
+    transform:rotate(-5deg);
+    transition:1s;
+}
+
+/* Sparkles */
+.sparkle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    animation:sparkle 1.5s linear infinite;
+}
+
+
+/* ===================== */
+#scene5{
+    display:flex;
+    align-items:center;
+    gap:40px;
+    width:80%;
+    max-width:900px;
+    padding:30px;
+    background:rgba(0,0,0,0.35);
+    border-radius:20px;
+}
+
+.scene5-photo{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.scene5-photo img{
+    width:280px;
+    background:#fff;
+    padding:10px 10px 30px;
+    border-radius:4px;
+    box-shadow:0 15px 30px rgba(0,0,0,0.5);
+    transform:rotate(-4deg);
+}
+
+.scene5-text{
+    flex:1.4;
+}
+
+.scene5-text h1{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.scene5-text p{
+    line-height:1.6;
+    font-size:17px;
+}
+
+/* Hearts */
+.heart{
+    position:absolute;
+    font-size:22px;
+    color:#ffb6c1;
+    animation:heartFloat 2.5s ease-out forwards;
+    pointer-events:none;
+}
+
+/* SCENE 6 */
+#scene6{
+    width:85%;
+    max-width:900px;
+    padding:35px;
+    background:rgba(0,0,0,.35);
+    border-radius:22px;
+    text-align:center;
+}
+
+.steps{
+    display:flex;
+    justify-content:space-between;
+    margin:40px auto 20px;
+    max-width:600px;
+    flex-wrap:wrap;
+    gap:20px;
+    position:relative;
+}
+
+.step{
+    font-size:34px;
+    cursor:pointer;
+    transition:.3s;
+    position:relative;
+}
+
+.step:nth-child(1){top:0; left:0;}
+.step:nth-child(2){top:20px; left:20px;}
+.step:nth-child(3){top:10px; left:40px;}
+.step:nth-child(4){top:25px; left:60px;}
+
+.step:hover{
+    transform:scale(1.3);
+    filter:drop-shadow(0 0 14px rgba(255,182,193,.9));
+}
+
+.memory-box{
+    margin-top:30px;
+    opacity:0;
+    transition:.6s;
+}
+
+.polaroid-large{
+    background:#fff;
+    padding:14px 14px 22px;
+    width:260px;
+    margin:0 auto;
+    border-radius:6px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.polaroid-large img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.polaroid-large p{
+    margin-top:12px;
+    color:#222;
+    font-size:14px;
+}
+
+/* SCENE 7 */
+#scene7{
+    text-align:center;
+}
+
+#wrappedPhoto{
+    width:300px;
+    height:200px;
+    background-image:url('./images/first valentines day.jpg');
+    background-size:cover;
+    filter:blur(10px);
+    margin:20px auto;
+    transition:filter 2s ease;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+#revealText{
+    opacity:0;
+    transition:opacity 1s ease;
+    font-size:20px;
+    margin-top:20px;
+}
+
+/* Flash effect */
+#flashEffect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.1s;
+}
+
+/* Animations */
+@keyframes float{
+    from{transform:translateY(100vh);opacity:0}
+    to{transform:translateY(-10vh);opacity:1}
+}
+@keyframes fall{
+    from{transform:translateY(-50px) rotate(0deg);opacity:0}
+    to{transform:translateY(110vh) rotate(360deg);opacity:1}
+}
+@keyframes sparkle{
+    from{transform:scale(.5);opacity:1}
+    to{transform:translateY(-100px) scale(1);opacity:0}
+}
+@keyframes heartFloat{
+    from{transform:translateY(0) scale(1);opacity:1}
+    to{transform:translateY(-120px) scale(1.8);opacity:0}
+}
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+</style>
+</head>
+
+<body>
+<div class="overlay"></div>
+<div id="flashEffect"></div>
+
+<!-- SCENE 1 -->
+<div class="container" id="scene1" style="opacity:1;pointer-events:auto;text-align:center;">
+<h1>Happy Valentine’s Day langga💖</h1>
+<p>Even from miles away, you’re still the best thing in my life. I’m going to keep proving how much I love you every single day. Miss you, langga!</p>
+<button onclick="goScene2()">Start</button>
+</div>
+
+<!-- SCENE 2 -->
+<div class="container" id="scene2" style="text-align:center;">
+<h1>Welcome to our memories 💕</h1>
+<p>Since I can't be there to hold your hand today, I made this so you can see how much you mean to me. Every photo here is a reason why I love you😚😚</p>
+<button onclick="goScene3()">Come with me</button>
+<button onclick="backToScene1()">Back</button>
+</div>
+
+<!-- SCENE 3 -->
+<div class="container" id="scene3">
+<h1>Our School Memories💖</h1>
+<p>Do you remember this place, ga? Every moment we spent here reminds me of us. I find myself wishing I could go back, even if it’s just for a single day, just to be there with you again🥺</p>
+<button onclick="goScene4()">Next</button>
+<button onclick="backToScene2()">Back</button>
+</div>
+
+<!-- SCENE 4 -->
+<div class="container" id="scene4" style="text-align:center;">
+<h1>Reassemble our memory 💕</h1>
+<p>Think of every piece as a moment we’ve shared. Just a soft reminder that no matter the distance, we always fit perfectly🥰</p>
+
+<div class="puzzle-container" id="puzzle"></div>
+
+<h2 id="congrats" style="opacity:0;"> You did it so proud of youuu langga 🥰💖</h2>
+
+<div style="display:flex;justify-content:center;">
+<div class="polaroid" style="background-image:url('./images/photo1.jpg')"></div>
+<div class="polaroid" style="background-image:url('./images/photo2.jpg')"></div>
+<div class="polaroid" style="background-image:url('./images/photo3.jpg')"></div>
+</div>
+
+<button onclick="backToScene3()">Back</button>
+<button id="puzzleNextBtn" style="opacity:0;">Next</button>
+</div>
+
+<!-- SCENE 5 -->
+<div class="container" id="scene5">
+<div class="scene5-photo">
+<img src="./images/first_meet.jpg">
+</div>
+<div class="scene5-text">
+<h1>Remember how we first met?😊</h1>
+<p>I’d give anything to experience that moment all over again. I still remember how hard I tried not to steal glances at you that day. It’s truly a treasure to me who would’ve known back then that I was already looking at my future ay?🙈 That moment is forever my comfort memory. This distance might not be easy, but I know we can conquer it. Kapit lang langga😘</p>
+<button onclick="backToScene4()">Back</button>
+<button onclick="goScene6()">Next</button>
+</div>
+</div>
+
+<!-- SCENE 6 -->
+<div class="container" id="scene6">
+<h1>Our Afternoon Walks </h1>
+<p>Click each step and walk with me again.  </p>
+
+<div class="steps">
+<div class="step" onclick="showMemory(0)">👣</div>
+<div class="step" onclick="showMemory(1)">👣</div>
+<div class="step" onclick="showMemory(2)">👣</div>
+<div class="step" onclick="showMemory(3)">👣</div>
+</div>
+
+<div class="memory-box" id="memoryBox">
+<div class="polaroid-large">
+<img id="memoryImage">
+<p id="memoryText"></p>
+</div>
+</div>
+
+<button onclick="backToScene5()">Back</button>
+<button onclick="goScene7()">Next</button>
+</div>
+
+<!-- SCENE 7 -->
+<div class="container" id="scene7" style="text-align:center;">
+
+    <h1>Unwrap the Memory 🎀</h1>
+    <p style="opacity:.85;margin-bottom:25px;">Our first Valentine's</p>
+
+    <!-- Wrapped Photo -->
+    <div id="wrappedPhoto" class="wrapped-photo"></div>
+
+    <button id="unwrapBtn" onclick="unwrap()">Unwrap our first Valentine’s</button>
+
+    <!-- Reveal Letter -->
+    <div class="reveal-card" id="revealText">
+        <p>
+        Do you remember this photo? This was the day you first held my hand, the day we went to church together to pray and make a wish, and most importantly our first Valentine’s Day. For the first time, Valentine’s felt real to me. It’s so memorable and comforting whenever I think back on it.
+        <br><br>
+        Do you still remember when you had lunch with the other SSBO officers? You had to go to the cashier to pay your tuition for the exams, and I insisted on standing in line for you so you wouldn't have to wait when you got back. But in the end palangga ka gid ka SMIT ga ya HAHAHA.
+        <br><br>
+        How I wish I could hold your hand again. This distance makes me crave seeing you every day, especially today. But I know that someday, we will have our moment again, and this distance will finally mean nothing
+        </p>
+        <button id="toSurpriseBtn" style="margin-top:20px; display:none;" onclick="triggerSurprise()">One last surprise... ✨</button>
+    </div>
+
+    <button onclick="backToScene6()" style="margin-top:25px;">Back</button>
+</div>
+
+<!-- SURPRISE SCENE -->
+<div class="container" id="surpriseScene" style="text-align:center;">
+    <h2 id="surpriseInstruction">Wait... before we finish</h2>
+    <p>Close your eyes and think of our favorite spot. ❤️</p>
+    <div id="loadingHeart" style="font-size: 60px; animation: pulse 1.5s infinite; margin: 20px;">💖</div>
+    
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <button id="readyBtn" style="opacity:0; transition: 2s;" onclick="revealFinalSurprise()">I'm ready, ga</button>
+        <button onclick="backToScene7()" style="background:rgba(255,255,255,0.2); font-size:14px;">Back to Letter</button>
+    </div>
+</div>
+
+<!-- SCENE 8 -->
+<div class="container" id="scene8" style="width: 90%; max-width: 900px; text-align: center;">
+    <h1 style="color: #ffda79; text-shadow: 0 0 20px rgba(255,218,121,0.6); margin-bottom: 20px;">Our Comfort Place 🌅</h1>
+    
+    <div class="final-frame" style="perspective: 1000px; margin-bottom: 20px;">
+        <img src="./images/comfort_place.jpg" id="comfortPhoto" style="width: 350px; border: 10px solid #fff; border-radius: 4px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transition: transform 0.1s ease-out;">
+    </div>
+
+    <div class="final-letter" style="background: rgba(0, 0, 0, 0.5); padding: 25px; border-radius: 15px; backdrop-filter: blur(8px); min-height: 120px; border: 1px solid rgba(255,218,121,0.3); margin-bottom: 20px;">
+        <p id="typewriterText" style="font-size: 19px; line-height: 1.6; color: #fff;"></p>
+    </div>
+
+    <div style="margin-top:20px;">
+        <button id="finalBtn" onclick="digitalHug()" style="background: #ff7675; display:none;">Receive my hug 🫂</button>
+        <br>
+        <button onclick="backToSurprise()" style="background:none; border:1px solid rgba(255,255,255,0.3); font-size:14px; margin-top:15px;">Back</button>
+    </div>
+</div>
+
+<script>
+/* EFFECTS */
+for(let i=0;i<60;i++){
+ let p=document.createElement("div");
+ p.className="pixel";
+ p.style.left=Math.random()*100+"vw";
+ p.style.animationDuration=5+Math.random()*10+"s";
+ document.body.appendChild(p);
+}
+for(let i=0;i<20;i++){
+ let l=document.createElement("div");
+ l.className="leaf";
+ l.style.left=Math.random()*100+"vw";
+ l.style.animationDuration=6+Math.random()*6+"s";
+ document.body.appendChild(l);
+}
+
+/* SCENE SWITCH */
+function switchScene(hide,show,bg){
+ document.getElementById(hide).style.opacity=0;
+ document.getElementById(hide).style.pointerEvents="none";
+ setTimeout(()=>{
+  document.getElementById(show).style.opacity=1;
+  document.getElementById(show).style.pointerEvents="auto";
+ },800);
+ document.body.style.background=bg;
+}
+
+function goScene2(){switchScene("scene1","scene2","#ffe4e1")}
+function backToScene1(){switchScene("scene2","scene1","url('./images/sky.jpg') center/cover")}
+function goScene3(){switchScene("scene2","scene3","url('./images/main building.jpg') center/cover")}
+function backToScene2(){switchScene("scene3","scene2","#ffe4e1")}
+function goScene4(){switchScene("scene3","scene4","url('./images/scene4_bg.jpg') center/cover"); initPuzzle();}
+function backToScene3(){switchScene("scene4","scene3","url('./images/main building.jpg') center/cover")}
+function backToScene4(){switchScene("scene5","scene4","url('./images/scene4_bg.jpg') center/cover")}
+function goScene5(){switchScene("scene4","scene5","url('./images/scene5_bg.jpg') center/cover")}
+function backToScene5(){switchScene("scene6","scene5","url('./images/scene5_bg.jpg') center/cover")}
+function goScene6(){switchScene("scene5","scene6","url('./images/scene6_bg.jpg') center/cover")}
+function goScene7(){switchScene("scene6","scene7","url('./images/scene7_bg.jpg') center/cover")}
+function backToScene6(){switchScene("scene7","scene6","url('./images/scene6_bg.jpg') center/cover")}
+
+/* PUZZLE */
+let first=null;
+let correct=["0","1","2","3","4","5"];
+function initPuzzle(){
+ const p=document.getElementById("puzzle");
+ p.innerHTML="";
+ let tiles=[];
+ for(let i=0;i<6;i++){
+  let t=document.createElement("div");
+  t.className="tile";
+  t.dataset.id=i;
+  t.style.backgroundPosition=`-${(i%3)*150}px -${Math.floor(i/3)*100}px`;
+  tiles.push(t);
+ }
+ tiles.sort(()=>Math.random()-0.5);
+ tiles.forEach(t=>{t.onclick=()=>clickTile(t);p.appendChild(t);});
+ document.getElementById("puzzleNextBtn").style.opacity=0;
+}
+
+function clickTile(tile){
+ if(!first){first=tile;return;}
+ let temp=first.style.backgroundPosition;
+ first.style.backgroundPosition=tile.style.backgroundPosition;
+ tile.style.backgroundPosition=temp;
+ let id=first.dataset.id;
+ first.dataset.id=tile.dataset.id;
+ tile.dataset.id=id;
+ first=null;
+ checkWin();
+}
+
+function checkWin(){
+ let ids=[...document.querySelectorAll(".tile")].map(t=>t.dataset.id);
+ if(ids.join()===correct.join()){
+  document.getElementById("congrats").style.opacity=1;
+  document.querySelectorAll(".polaroid").forEach((p,i)=>{
+      setTimeout(()=>p.style.opacity=1,i*400);
+  });
+  document.getElementById("puzzleNextBtn").style.opacity=1;
+  document.getElementById("puzzleNextBtn").onclick=goScene5;
+ }
+}
+
+/* SCENE 5 HEARTS */
+document.getElementById("scene5").addEventListener("click",e=>{
+ const h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="💖";
+ h.style.left=e.clientX+"px";
+ h.style.top=e.clientY+"px";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),2500);
+});
+
+/* SCENE 6 MEMORY */
+const memories=[
+ {text:"Remember how we used to wait for each other every afternoon? I still remember how we always almost got caught by others on our way home. The 'kaba' was so real, but it was also so fun just walking with you peacefully. Honestly, even the thrill of almost getting caught felt good because I was with you like as innn",image:"./images/walk1.jpg"},
+ {text:"This is one of my favorite candid photos of us look how close we are ackkk! I’m praying this moment visits me in my dreams tonight.🥺 Do you remember how much you insisted on carrying your own bag? I kept pleading because it looked so heavy, but you wouldn't let me. Katigas ng ulo mo Arianee uyyy! But I love you anyway.🥰",image:"./images/walk2.jpg"},
+ {text:"I’ll always treasure these moments langga. Remember how we’d always have ice cream together just to feel better after a long day. Huhu, how I wish we were always together lalo na pag 'drained' ta🥺. I miss the comfort of just being with you.",image:"./images/walk3.jpg"},
+ {text:"Remember this? This was right after we had so much fun at Savemore! Honestly, that arcade date was one of the best things that ever happened to me. ka gaan lang ng feeling that day. We had all the time in the world, yet it still felt too short. It’s one of those moments that reminds me why I’m so lucky to have you.🤧",image:"./images/walk4.jpg"}
+];
+
+function showMemory(i){
+ document.getElementById("memoryText").innerText=memories[i].text;
+ document.getElementById("memoryImage").src=memories[i].image;
+ document.getElementById("memoryBox").style.opacity=1;
+}
+
+/* SCENE 7 UNWRAP */
+function unwrap(){
+ document.getElementById("wrappedPhoto").style.filter="blur(0px)";
+    document.getElementById("unwrapBtn").style.display="none";
+    setTimeout(()=>{
+        document.getElementById("revealText").style.opacity=1;
+        document.getElementById("toSurpriseBtn").style.display="inline-block";
+    },2000);
+}
+
+function triggerSurprise() {
+    // Hide scene 7
+    document.getElementById("scene7").style.opacity = 0;
+    document.getElementById("scene7").style.pointerEvents = "none";
+    
+    // Show surprise scene
+    setTimeout(() => {
+        document.getElementById("surpriseScene").style.opacity = 1;
+        document.getElementById("surpriseScene").style.pointerEvents = "auto";
+        document.body.style.background = "#000";
+        
+        // Show the ready button after 3 seconds
+        setTimeout(() => { 
+            document.getElementById("readyBtn").style.opacity = 1; 
+        }, 3000);
+    }, 800);
+}
+
+function backToScene7() {
+    if(typewriterActive) typewriterActive = false;
+    document.getElementById("surpriseScene").style.opacity = 0;
+    document.getElementById("surpriseScene").style.pointerEvents = "none";
+    setTimeout(() => {
+        document.getElementById("scene7").style.opacity = 1;
+        document.getElementById("scene7").style.pointerEvents = "auto";
+        document.body.style.background = "url('./images/scene7_bg.jpg') center/cover";
+    }, 800);
+}
+
+/* SCENE 8 FUNCTIONS */
+let typewriterActive = false;
+
+function revealFinalSurprise() {
+    const flash = document.getElementById("flashEffect");
+    flash.style.opacity = "1";
+    
+    setTimeout(() => {
+        flash.style.transition = "opacity 1.5s ease-out";
+        flash.style.opacity = "0";
+        
+        // Hide surprise scene
+        document.getElementById("surpriseScene").style.opacity = 0;
+        document.getElementById("surpriseScene").style.pointerEvents = "none";
+        
+        // Show scene 8
+        setTimeout(() => {
+            document.getElementById("scene8").style.opacity = 1;
+            document.getElementById("scene8").style.pointerEvents = "auto";
+            document.body.style.background = "linear-gradient(to bottom, #2c3e50, #fd8112)";
+            startFinalTypewriter();
+        }, 800);
+    }, 100);
+}
+
+function startFinalTypewriter() {
+   
+    const finalMsg = `Happy Valentine’s Day, langga! 💖
+
+No matter how far apart we are, I hope you can still feel my presence through all the memories we’ve shared. I love you palagi, ga, and I will keep loving you no matter what. This place our comfort space is something I’ll forever cherish because it’s where I’ve felt the happiest. But I know that in the future, we’ll have so many more moments together. I’ll always do my best to love you in a way that truly reaches your heart.
+
+Happy Valentine’s again! I know that lately we’ve faced some struggles not just in life, but in our relationship too—but I pray that we will make it through. This message might not be much, but please take it as my 'flowers' for you today.
+
+Thank you for always loving me and giving your best. I am always, always proud of you, okay? Kaya laban lang dira na side, and I will do the same here. I know we still have so many things left to do, and one day, we’ll finally do them all together. I love you!😘😘`;
+
+    let i = 0;
+    const el = document.getElementById("typewriterText");
+    if (el) {
+        el.innerHTML = "";
+        typewriterActive = true;
+        
+        function type() {
+            if (i < finalMsg.length && typewriterActive) {
+                // If the character is a newline, use <br> for HTML rendering
+                if (finalMsg.charAt(i) === "\n") {
+                    el.innerHTML += "<br>";
+                } else {
+                    el.innerHTML += finalMsg.charAt(i);
+                }
+                i++;
+                setTimeout(type, 50);
+            } else if (typewriterActive) {
+                document.getElementById("finalBtn").style.display = "inline-block";
+            }
+        }
+        setTimeout(type, 1000);
+    }
+}
+
+function backToSurprise() {
+    typewriterActive = false;
+    document.getElementById("scene8").style.opacity = 0;
+    document.getElementById("scene8").style.pointerEvents = "none";
+    
+    setTimeout(() => {
+        document.getElementById("surpriseScene").style.opacity = 1;
+        document.getElementById("surpriseScene").style.pointerEvents = "auto";
+        document.body.style.background = "#000";
+        document.getElementById("readyBtn").style.opacity = 1;
+        
+        const typewriterEl = document.getElementById("typewriterText");
+        if (typewriterEl) typewriterEl.innerHTML = "";
+        const finalBtn = document.getElementById("finalBtn");
+        if (finalBtn) finalBtn.style.display = "none";
+    }, 800);
+}
+
+function digitalHug() {
+    // Create a heart explosion
+    for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "🫂";
+            heart.style.left = Math.random() * 100 + "%";
+            heart.style.top = Math.random() * 100 + "%";
+            heart.style.fontSize = "40px";
+            heart.style.color = "#ff7675";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 2500);
+        }, i * 50);
+    }
+    
+    // Flash effect
+    const flash = document.getElementById("flashEffect");
+    flash.style.background = "#ff7675";
+    flash.style.opacity = "0.3";
+    setTimeout(() => {
+        flash.style.opacity = "0";
+    }, 500);
+    
+    alert("Virtual hug sent! 🤗 I love you, langga! ❤️");
+}
+
+// Mouse movement effect for comfort photo
+document.addEventListener("mousemove", function(e) {
+    const comfortPhoto = document.getElementById("comfortPhoto");
+    if (comfortPhoto) {
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+        comfortPhoto.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    }
+});
+
+
+</script>
+</body>
+</html>
